@@ -1,0 +1,236 @@
+:root {
+  --apple-pink: #fa2d48;
+  --glass-bg: rgba(255, 255, 255, 0.8);
+  --text-main: #000000;
+  --text-sub: #8e8e93;
+  --slider-fill: 65%;
+  --blur-amount: 30px;
+}
+
+/* =========================
+ BODY + 배경 블러 핵심
+ ========================= */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  position: relative;
+  perspective: 1000px;
+
+  background:
+    radial-gradient(at 0% 0%, #c1ceff 0px, transparent 50%),
+    radial-gradient(at 100% 0%, #f3e5f5 0px, transparent 50%),
+    radial-gradient(at 100% 100%, #e3f2fd 0px, transparent 50%),
+    radial-gradient(at 0% 100%, #ffebee 0px, transparent 50%);
+  background-color: #f5f5f7;
+}
+
+/* 🔥 앨범아트 블러 배경 */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+
+  background: url("fallin light art.png") center/cover no-repeat;
+
+  filter: blur(10px) saturate(120%);
+  transform: scale(1);
+
+  opacity: 0.6;
+  z-index: -1;
+}
+
+/* =========================
+ 메인 카드
+ ========================= */
+.container {
+  position: relative;
+  width: clamp(280px, 90vw, 400px);
+
+  padding: clamp(20px, 5vw, 35px);
+  max-width: 400px;
+
+  border-radius: 44px;
+
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(var(--blur-amount)) saturate(180%);
+  -webkit-backdrop-filter: blur(var(--blur-amount)) saturate(180%);
+
+  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.2),
+    inset 0 1px 1px rgba(255, 255, 255, 0.3);
+
+  overflow: hidden;
+  transform-style: preserve-3d;
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+
+  will-change: transform;
+}
+.container::before {
+  content: "";
+  position: absolute;
+  inset: -50%;
+
+  background: radial-gradient(
+    circle at var(--x, 50%) var(--y, 50%),
+    rgba(255, 255, 255, 0.35),
+    transparent 60%
+  );
+
+  opacity: 0.6;
+  pointer-events: none;
+  transition: all 0.3s ease-out;
+}
+.container::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background: inherit;
+  backdrop-filter: blur(50px);
+  opacity: 0.25;
+
+  pointer-events: none;
+}
+
+/* =========================
+ 앨범 아트
+ ========================= */
+.album-cover {
+  margin-bottom: clamp(15px, 4vw, 30px);
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: linear-gradient(135deg, #c1ceff 0%, #f3e5f5 100%);
+  border-radius: 28px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.album-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+  display: block;
+}
+
+/* =========================
+ 텍스트
+ ========================= */
+.info {
+  text-align: left;
+  margin-bottom: 25px;
+  padding-left: 5px;
+}
+
+h1 {
+  font-size: clamp(1.2rem, 4vw, 1.5rem);
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: -0.5px;
+}
+
+.artist {
+  font-size: clamp(0.9rem, 3vw, 1.1rem);
+  font-weight: 400;
+  color: var(--apple-pink);
+  margin: 4px 0 0 0;
+}
+
+/* =========================
+ 슬라이더
+ ========================= */
+.slider-container {
+  width: 100%;
+  margin: 25px 0;
+  display: flex;
+  align-items: center;
+}
+
+input[type="range"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+
+  background: rgba(0, 0, 0, 0.1);
+  background-image: linear-gradient(var(--apple-pink), var(--apple-pink));
+  background-size: var(--slider-fill) 100%;
+  background-repeat: no-repeat;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  -webkit-appearance: none;
+  height: 6px;
+  width: 6px;
+  border-radius: 50%;
+  background: var(--apple-pink);
+  opacity: 0;
+  transition: all 0.2s ease-in-out;
+}
+
+.slider-container:hover input[type="range"]::-webkit-slider-thumb {
+  opacity: 1;
+  height: 18px;
+  width: 18px;
+  transform: scale(1.2);
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* =========================
+ 플레이어
+ ========================= */
+.player-wrapper {
+  border-radius: 20px;
+  overflow: hidden;
+  margin-top: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+iframe {
+  display: block;
+  width: 100%;
+  border: none;
+}
+@media (hover: none) {
+  input[type="range"]::-webkit-slider-thumb {
+    opacity: 1;
+    height: 16px;
+    width: 16px;
+  }
+
+  .container {
+    transform: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    border-radius: 28px;
+  }
+
+  .player-wrapper iframe {
+    height: 150px;
+  }
+}
+
+@media (min-width: 768px) {
+  body {
+    padding: 40px;
+  }
+}

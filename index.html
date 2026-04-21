@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GFRIEND - Fallin' Light | Apple Music Style</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="album-cover">
+        <img src="fallin light art.png" alt="GFRIEND Fallin' Light 앨범 아트" />
+      </div>
+
+      <div class="info">
+        <h1>Fallin' Light</h1>
+        <p class="artist">여자친구 (GFRIEND)</p>
+      </div>
+
+      <div class="slider-container">
+        <input type="range" id="progress-slider" min="0" max="100" value="65" />
+      </div>
+
+      <div class="player-wrapper">
+        <iframe
+          allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
+          height="175"
+          src="https://embed.music.apple.com/jp/song/fallin-light-%E5%A4%A9%E4%BD%BF%E3%81%AE%E6%A2%AF%E5%AD%90/1483715339?l=en-US"
+        >
+        </iframe>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
